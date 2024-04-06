@@ -7,9 +7,12 @@ def sqlite_conn():
 
 def run_query(query):
     cur = sqlite_conn().cursor()
-    cur.execute(query)
-    result = cur.fetchall()
-    return result
+    try:
+        cur.execute(query)
+        result = cur.fetchall()
+        return result
+    except sqlite3.OperationalError as err:
+        return f"The following error occured {str(err)}"
 
 
 run_query_tool = Tool.from_function(
