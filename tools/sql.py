@@ -6,7 +6,7 @@ def sqlite_conn():
     return conn
 
 def run_query(query):
-    cur = conn.cursor()
+    cur = sqlite_conn().cursor()
     cur.execute(query)
     result = cur.fetchall()
     return result
